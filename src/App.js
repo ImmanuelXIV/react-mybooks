@@ -9,13 +9,14 @@ import { Routes, Route } from 'react-router-dom'
 class BooksApp extends React.Component {
   
   state = {
-    books: []
+    books: [],
+    shelves: ["wantToRead", "currentlyReading", "read"]
   }
   
   componentDidMount() {
     BooksAPI.getAll()
     .then((books) => {
-      //console.log(books)
+      console.log(books)
       this.setState(() => {
         books
       })
@@ -26,7 +27,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
       	<Routes>
-          <Route path='/' element={<ListBooks/>}/>
+          <Route path='/' element={<ListBooks books={this.state.books} shelves={this.state.shelves}/>}/>
           <Route path='/search' element={<SearchBooks/>}/>
 		</Routes>
       </div>
