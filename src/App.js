@@ -17,17 +17,20 @@ class BooksApp extends React.Component {
     BooksAPI.getAll()
     .then((books) => {
       console.log(books)
-      this.setState(() => {
+      this.setState(() => ({
         books
-      })
+      }))
     })    
   }
 
   render() {
+  	const {books, shelves} = this.state
+    
     return (
       <div className="app">
+      {/*<div>{JSON.stringify(this.state.books)}</div>*/}
       	<Routes>
-          <Route path='/' element={<ListBooks books={this.state.books} shelves={this.state.shelves}/>}/>
+          <Route path='/' element={<ListBooks books={books} shelves={shelves}/>}/>
           <Route path='/search' element={<SearchBooks/>}/>
 		</Routes>
       </div>

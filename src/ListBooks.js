@@ -6,10 +6,12 @@ import BookShelf from './BookShelf'
 class ListBooks extends Component {
   
   componentDidMount() {
-  	console.log(this.props.shelves)
+
   }
   
   render() {
+    const { books, shelves} = this.props
+    
     return (
       <div className="list-books">
             <div className="list-books-title">
@@ -17,8 +19,8 @@ class ListBooks extends Component {
             </div>
             <div className="list-books-content">
               <div>
-      			 {this.props.shelves.map(shelf=>(
-      			   <BookShelf key={shelf} bookshelf={shelf}/>
+     			 {shelves.map(shelf=>(
+      			   <BookShelf key={shelf} shelf={shelf} books={books}/>
                  ))}
 {/* 
                 <div className="bookshelf">
