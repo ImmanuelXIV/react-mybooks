@@ -16,14 +16,25 @@ class BooksApp extends React.Component {
       {id: 3, name: "read"}]
   }
   
-  componentDidMount() {
+  fetchBooks = () => {
     BooksAPI.getAll()
     .then((books) => {
       console.log(books)
       this.setState(() => ({
         books
       }))
-    })    
+    })
+  }
+  
+  componentDidMount() {
+    this.fetchBooks()
+  }
+  
+  changeShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+    .then(() => {
+      this.fetchBooks()
+    })
   }
 
   render() {
@@ -33,7 +44,7 @@ class BooksApp extends React.Component {
       <div className="app">
       {/*<div>{JSON.stringify(this.state.books)}</div>*/}
       	<Routes>
-          <Route path='/' element={<ListBooks books={books} shelves={shelves}/>}/>
+          <Route path='/' element={<ListBooks books={books} shelves={shelves} changeShelf={this.changeShelf}/>}/>
           <Route path='/search' element={<SearchBooks/>}/>
 		</Routes>
       </div>
