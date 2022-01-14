@@ -10,7 +10,10 @@ class BooksApp extends React.Component {
   
   state = {
     books: [],
-    shelves: ["wantToRead", "currentlyReading", "read"]
+    shelves: [
+      {id: 1, name: "wantToRead"},
+      {id: 2, name: "currentlyReading"}, 
+      {id: 3, name: "read"}]
   }
   
   componentDidMount() {
