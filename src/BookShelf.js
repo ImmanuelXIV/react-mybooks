@@ -12,7 +12,7 @@ class BookShelf extends Component {
       {/* <h2 className="bookshelf-title">Currently Reading</h2> */}
       <div className="bookshelf-books">
       <ol className="books-grid">
-		{books.map(book=>{
+		{books.map(book => {
          	if (book.shelf === shelf){
               return <Book key={book.id} book={book} changeShelf={changeShelf}/>
             }
