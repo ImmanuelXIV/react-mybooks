@@ -22,7 +22,7 @@ class SearchBooks extends Component {
   
 
   render() {
-    const { books, searchBks, changeShelf} = this.props
+    const { books, searchBks, changeShelf, referenceBooks} = this.props
     
     return (
       <div className="search-books">
@@ -49,7 +49,7 @@ class SearchBooks extends Component {
 		  <ol className="books-grid">
 			{books && books.map((book) => {
               if (book.hasOwnProperty('imageLinks')) {
-                return <Book key={book.id} book={book} changeShelf={changeShelf}/>
+                return <Book key={book.id} book={book} changeShelf={changeShelf} referenceBooks={referenceBooks}/>
               }
 			})}
 		  </ol>

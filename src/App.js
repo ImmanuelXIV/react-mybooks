@@ -15,7 +15,8 @@ class BooksApp extends React.Component {
     shelves: [
       {id: 1, name: "wantToRead"},
       {id: 2, name: "currentlyReading"}, 
-      {id: 3, name: "read"}]
+      {id: 3, name: "read"},
+      {id: 4, name: "None"}]
   }
   
   fetchBooks = () => {
@@ -38,16 +39,14 @@ class BooksApp extends React.Component {
       this.fetchBooks()
     })
   }
-  
+
   searchBks = (query, maxResults=6) => {
     if (query.length > 0) {
       BooksAPI.search(query, maxResults)
       .then((books) => {
-        //console.log(JSON.stringify(books))
         this.setState(() => ({
           booksQueried: books
         }))
-        //console.log(`Books queried: ${JSON.stringify(this.state.booksQueried)}`)
       })
     }
     else {
@@ -63,7 +62,6 @@ class BooksApp extends React.Component {
     
     return (
       <div className="app">
-      {/*<div>{JSON.stringify(this.state.books)}</div>*/}
       	<Routes>
           <Route path='/' element={
             <ListBooks 
@@ -77,6 +75,7 @@ class BooksApp extends React.Component {
             	books={booksQueried}
 				searchBks={this.searchBks} 
 				changeShelf={this.changeShelf}
+				referenceBooks={books}
             />}
 		  />
 		</Routes>

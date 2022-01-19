@@ -2,7 +2,21 @@ import React, { Component } from 'react'
 
 class Book extends Component {
   render() {
-    const { book, changeShelf } = this.props
+    const { book, changeShelf, referenceBooks } = this.props
+    
+    let shelf = 'none'
+    
+    if (book.shelf !== undefined) {
+      shelf = book.shelf
+    }
+    
+    if (referenceBooks) {
+      referenceBooks.map((b) => {
+        if (b.id === book.id) {
+        	shelf = b.shelf
+    	}
+      })
+    }
     
     return(
       <div className="book">
@@ -10,7 +24,7 @@ class Book extends Component {
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
             <div className="book-shelf-changer">
               <select 
-              value={book.shelf} 
+              value={shelf} 
               onChange={(event) => {
               changeShelf(book, event.target.value)
               }
