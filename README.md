@@ -26,6 +26,9 @@ To get started_
 │   ├── index.css # Global styles.
 │   ├── index.js # Used for DOM rendering.
 │   └── Components # React components.
+├── imgs
+│   ├── screenshot1.png
+│   └── screenshot2.png
 ├── public
 │   ├── favicon.ico # React Icon.
 │   └── index.html # DO NOT MODIFY
