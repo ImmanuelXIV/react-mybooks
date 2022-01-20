@@ -1,6 +1,10 @@
 # MyReadly
 This is a little React web app to keep track of books that you have, want to, or are currently reading.
 
+Home screen             |  Search screen
+:-------------------------:|:-------------------------:
+![Home screen](imgs/screenshot1.png)  |  ![Search screen](imgs/screenshot2.png)
+
 ## TL;DR
 To get started_
 
