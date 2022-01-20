@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 
+
 class Book extends Component {
   render() {
     const { book, changeShelf, referenceBooks } = this.props
     
     let shelf = 'none'
-    
     if (book.shelf !== undefined) {
       shelf = book.shelf
     }
-    
     if (referenceBooks) {
       referenceBooks.map((b) => {
         if (b.id === book.id) {

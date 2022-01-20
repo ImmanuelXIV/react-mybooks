@@ -4,7 +4,6 @@ import './App.css'
 import SearchBooks from './SearchBooks'
 import ListBooks from './ListBooks'
 import { Routes, Route } from 'react-router-dom'
-import {debounce} from 'throttle-debounce'
 
 
 class BooksApp extends React.Component {
@@ -15,14 +14,12 @@ class BooksApp extends React.Component {
     shelves: [
       {id: 1, name: "wantToRead"},
       {id: 2, name: "currentlyReading"}, 
-      {id: 3, name: "read"},
-      {id: 4, name: "None"}]
+      {id: 3, name: "read"}]
   }
   
   fetchBooks = () => {
     BooksAPI.getAll()
     .then((books) => {
-      console.log(books)
       this.setState(() => ({
         books
       }))
@@ -39,24 +36,32 @@ class BooksApp extends React.Component {
       this.fetchBooks()
     })
   }
+  
+  resetSearch = () => {
+    this.setState(() => ({
+      booksQueried: []
+    }))
+  }
 
   searchBks = (query, maxResults=6) => {
     if (query.length > 0) {
-      BooksAPI.search(query, maxResults)
-      .then((books) => {
+      try {
+        BooksAPI.search(query, maxResults)
+        .then((books) => {
+          this.setState(() => ({
+            booksQueried: books
+          }))
+        })
+      }
+      catch (error) {
+        console.log(`Error: ${error}`)
         this.setState(() => ({
-          booksQueried: books
+          booksQueried: []
         }))
-      })
-    }
-    else {
-      this.setState(() => ({
-        booksQueried: []
-      }))
+      }
     }
   }
   
-
   render() {
   	const {books, booksQueried, shelves} = this.state
     
@@ -76,6 +81,7 @@ class BooksApp extends React.Component {
 				searchBks={this.searchBks} 
 				changeShelf={this.changeShelf}
 				referenceBooks={books}
+				resetSearch={this.resetSearch}
             />}
 		  />
 		</Routes>
