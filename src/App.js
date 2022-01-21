@@ -53,6 +53,9 @@ class BooksApp extends React.Component {
         }));
       }
     }
+    else {
+      this.resetSearch();
+    }
   }
 
   render() {
