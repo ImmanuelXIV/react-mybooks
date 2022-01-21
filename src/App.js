@@ -24,11 +24,9 @@ class BooksApp extends React.Component {
     this.fetchBooks();
   }
 
-  changeShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf)
-      .then(() => {
-        this.fetchBooks();
-      });
+  changeShelf = async (book, shelf) => {
+    await BooksAPI.update(book, shelf)
+    this.fetchBooks();
   }
 
   resetSearch = () => {
@@ -37,15 +35,13 @@ class BooksApp extends React.Component {
     }));
   }
 
-  searchBks = (query, maxResults = 6) => {
+  searchBks = async (query, maxResults = 6) => {
     if (query.length > 0) {
       try {
-        BooksAPI.search(query, maxResults)
-          .then((books) => {
-            this.setState(() => ({
-              booksQueried: books,
-            }));
-          });
+        const books = await BooksAPI.search(query, maxResults);
+        this.setState(() => ({
+          booksQueried: books,
+        }));
       } catch (error) {
         console.log(`Error: ${error}`);
         this.setState(() => ({
